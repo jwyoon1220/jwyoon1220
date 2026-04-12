@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>파린 Parin — Full-Stack Developer</title>
+<meta name="description" content="OS 커널 · 게임엔진 · 백엔드 · 프론트엔드 풀스택 개발자">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:     #0c0c0c;
+  --text:   #e8e3d9;
+  --muted:  rgba(232,227,217,.45);
+  --border: rgba(232,227,217,.1);
+  --accent: #79f06a;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:'Pretendard Variable','Pretendard',
+    -apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── Header ── */
+header{
+  position:sticky;top:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.5rem max(2rem,6vw);
+  border-bottom:1px solid var(--border);
+  background:rgba(12,12,12,.9);
+  backdrop-filter:blur(16px);
+}
+.logo{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:.88rem;
+  letter-spacing:.2em;text-decoration:none;color:var(--text);
+}
+nav{display:flex;gap:2rem}
+nav a{
+  font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;
+  text-decoration:none;color:var(--muted);
+  transition:color .2s;
+}
+nav a:hover{color:var(--text)}
+
+/* ── Hero ── */
+.hero{
+  min-height:86vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:0 max(2rem,6vw);
+  border-bottom:1px solid var(--border);
+}
+.hero-role{
+  font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:2rem;
+}
+.hero-name{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(4.5rem,18vw,13rem);
+  font-weight:800;line-height:.92;
+  letter-spacing:-.02em;
+}
+.hero-sub{
+  margin-top:2.5rem;
+  font-size:clamp(.9rem,1.5vw,1.05rem);
+  color:var(--muted);letter-spacing:.04em;line-height:1.7;
+}
+
+/* ── Section ── */
+.section{
+  padding:5rem max(2rem,6vw);
+  border-bottom:1px solid var(--border);
+}
+.section-label{
+  display:block;
+  font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:3.5rem;
+}
+
+/* ── Tech ── */
+.tech-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:3rem 4rem;
+}
+.tech-category h3{
+  font-family:'Syne',sans-serif;
+  font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:1.4rem;padding-bottom:.6rem;
+  border-bottom:1px solid rgba(121,240,106,.2);
+}
+.tech-category ul{list-style:none;display:flex;flex-direction:column;gap:.7rem}
+.tech-category li{font-size:1rem;color:var(--text);line-height:1.4}
+
+/* ── Projects ── */
+.project-list{display:flex;flex-direction:column}
+.project-item{
+  display:grid;
+  grid-template-columns:3.5rem 1fr auto;
+  align-items:center;gap:2rem;
+  padding:1.6rem 0;
+  border-bottom:1px solid var(--border);
+  transition:opacity .2s;
+}
+.project-item:first-child{border-top:1px solid var(--border)}
+.project-item:hover{opacity:.55}
+.project-num{
+  font-family:'Syne',sans-serif;font-size:.72rem;
+  color:var(--muted);letter-spacing:.1em;
+}
+.project-name{font-size:1.25rem;font-weight:600;letter-spacing:-.01em}
+.project-cat{font-size:.78rem;color:var(--muted);letter-spacing:.05em}
+
+/* ── Footer ── */
+footer{
+  padding:3.5rem max(2rem,6vw);
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:1rem;
+}
+.github-link{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(1.4rem,3vw,2rem);
+  font-weight:700;text-decoration:none;
+  color:var(--text);letter-spacing:.04em;
+  transition:color .2s;
+}
+.github-link:hover{color:var(--accent)}
+.copyright{font-size:.78rem;color:var(--muted)}
+
+/* ── Fade-in ── */
+.fade{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.fade.in{opacity:1;transform:none}
+
+/* ── Responsive ── */
+@media(max-width:640px){
+  .project-item{grid-template-columns:2.5rem 1fr}
+  .project-cat{display:none}
+  footer{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<header class="fade">
+  <a class="logo" href="#">PARIN</a>
+  <nav>
+    <a href="#tech">Tech Stack</a>
+    <a href="#projects">Projects</a>
+    <a href="https://github.com/jwyoon1220" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero fade">
+    <p class="hero-role">Full-Stack Developer</p>
+    <h1 class="hero-name">파린<br>Parin</h1>
+    <p class="hero-sub">
+      OS&thinsp;Kernel&ensp;&middot;&ensp;Game&thinsp;Engine&ensp;&middot;&ensp;Backend&ensp;&middot;&ensp;Frontend
+    </p>
+  </section>
+
+  <section id="tech" class="section fade">
+    <span class="section-label">Tech Stack</span>
+    <div class="tech-grid">
+      <div class="tech-category">
+        <h3>Language</h3>
+        <ul>
+          <li>Java</li>
+          <li>Kotlin</li>
+          <li>C / C++</li>
+          <li>C#</li>
+          <li>NASM Assembly</li>
+          <li>Python</li>
+        </ul>
+      </div>
+      <div class="tech-category">
+        <h3>Framework</h3>
+        <ul>
+          <li>Spring Boot</li>
+          <li>LWJGL</li>
+          <li>Minecraft Plugin</li>
+          <li>JNI</li>
+        </ul>
+      </div>
+      <div class="tech-category">
+        <h3>Domain</h3>
+        <ul>
+          <li>OS / Kernel</li>
+          <li>Game Engine</li>
+          <li>Graphics</li>
+          <li>Frontend</li>
+          <li>Backend</li>
+          <li>Low-Level Programming</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="section fade">
+    <span class="section-label">Projects</span>
+    <div class="project-list">
+      <div class="project-item">
+        <span class="project-num">01</span>
+        <span class="project-name">휘토피아</span>
+        <span class="project-cat">Minecraft Streamer Server</span>
+      </div>
+      <div class="project-item">
+        <span class="project-num">02</span>
+        <span class="project-name">휘리릭</span>
+        <span class="project-cat">Minecraft Streamer Server</span>
+      </div>
+      <div class="project-item">
+        <span class="project-num">03</span>
+        <span class="project-name">골동품</span>
+        <span class="project-cat">Minecraft Streamer Server</span>
+      </div>
+      <div class="project-item">
+        <span class="project-num">04</span>
+        <span class="project-name">디두월드2</span>
+        <span class="project-cat">Minecraft Streamer Server</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="fade">
+  <a class="github-link" href="https://github.com/jwyoon1220" target="_blank" rel="noopener">
+    ↗&thinsp;GitHub / jwyoon1220
+  </a>
+  <span class="copyright">© 2026 Parin&ensp;&middot;&ensp;Full-Stack Developer</span>
+</footer>
+
+<script>
+const io = new IntersectionObserver(
+  entries => entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }),
+  { threshold: 0.06 }
+);
+document.querySelectorAll('.fade').forEach((el, i) => {
+  el.style.transitionDelay = i * 80 + 'ms';
+  io.observe(el);
+});
+</script>
+</body>
+</html>
