@@ -1,253 +1,403 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>파린 Parin — Full-Stack Developer</title>
-<meta name="description" content="OS 커널 · 게임엔진 · 백엔드 · 프론트엔드 풀스택 개발자">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg:     #0c0c0c;
-  --text:   #e8e3d9;
-  --muted:  rgba(232,227,217,.45);
-  --border: rgba(232,227,217,.1);
-  --accent: #79f06a;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>파린 Parin — Full Stack Developer</title>
+    <meta name="description" content="OS 커널 · 게임엔진 · 백엔드 · 프론트엔드 풀스택 개발자">
 
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+    
+    <style>
+        /* ── Variables & Base ────────────────────── */
+        :root {
+            --bg: #f4f7ec;
+            --ink: #0d2b2a;         /* 메인 텍스트 */
+            --sub: #4a5d5a;         /* 서브 텍스트 */
+            --line: rgba(13, 43, 42, 0.12);
+            --card: rgba(255, 255, 255, 0.45);
+            --accent: #158f7e;
 
-body{
-  font-family:'Pretendard Variable','Pretendard',
-    -apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  -webkit-font-smoothing:antialiased;
-}
+            /* 호환성 유지 */
+            --text: var(--ink);
+            --muted: var(--sub);
+            --border: var(--line);
+        }
 
-/* ── Header ── */
-header{
-  position:sticky;top:0;z-index:100;
-  display:flex;justify-content:space-between;align-items:center;
-  padding:1.5rem max(2rem,6vw);
-  border-bottom:1px solid var(--border);
-  background:rgba(12,12,12,.9);
-  backdrop-filter:blur(16px);
-}
-.logo{
-  font-family:'Syne',sans-serif;font-weight:800;font-size:.88rem;
-  letter-spacing:.2em;text-decoration:none;color:var(--text);
-}
-nav{display:flex;gap:2rem}
-nav a{
-  font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;
-  text-decoration:none;color:var(--muted);
-  transition:color .2s;
-}
-nav a:hover{color:var(--text)}
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-/* ── Hero ── */
-.hero{
-  min-height:86vh;
-  display:flex;flex-direction:column;justify-content:center;
-  padding:0 max(2rem,6vw);
-  border-bottom:1px solid var(--border);
-}
-.hero-role{
-  font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--muted);margin-bottom:2rem;
-}
-.hero-name{
-  font-family:'Syne',sans-serif;
-  font-size:clamp(4.5rem,18vw,13rem);
-  font-weight:800;line-height:.92;
-  letter-spacing:-.02em;
-}
-.hero-sub{
-  margin-top:2.5rem;
-  font-size:clamp(.9rem,1.5vw,1.05rem);
-  color:var(--muted);letter-spacing:.04em;line-height:1.7;
-}
+        body {
+            font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+            color: var(--ink);
+            background:
+                    radial-gradient(circle at 18% 20%, #ffeeb4 0%, transparent 38%),
+                    radial-gradient(circle at 80% 10%, #b7f2db 0%, transparent 35%),
+                    linear-gradient(165deg, #f4f7ec 0%, #dbeadf 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.5;
+        }
 
-/* ── Section ── */
-.section{
-  padding:5rem max(2rem,6vw);
-  border-bottom:1px solid var(--border);
-}
-.section-label{
-  display:block;
-  font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--muted);margin-bottom:3.5rem;
-}
+        /* ── 효과 (Noise & Orbs) ─────────────────── */
+        .noise {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image: radial-gradient(rgba(10, 10, 10, 0.03) 0.6px, transparent 0.6px);
+            background-size: 3px 3px;
+            z-index: -2;
+        }
 
-/* ── Tech ── */
-.tech-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:3rem 4rem;
-}
-.tech-category h3{
-  font-family:'Syne',sans-serif;
-  font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--accent);
-  margin-bottom:1.4rem;padding-bottom:.6rem;
-  border-bottom:1px solid rgba(121,240,106,.2);
-}
-.tech-category ul{list-style:none;display:flex;flex-direction:column;gap:.7rem}
-.tech-category li{font-size:1rem;color:var(--text);line-height:1.4}
+        .bg-orb {
+            position: fixed;
+            width: 360px;
+            height: 360px;
+            border-radius: 50%;
+            filter: blur(36px);
+            opacity: 0.35;
+            z-index: -1;
+            animation: drift 16s ease-in-out infinite;
+        }
 
-/* ── Projects ── */
-.project-list{display:flex;flex-direction:column}
-.project-item{
-  display:grid;
-  grid-template-columns:3.5rem 1fr auto;
-  align-items:center;gap:2rem;
-  padding:1.6rem 0;
-  border-bottom:1px solid var(--border);
-  transition:opacity .2s;
-}
-.project-item:first-child{border-top:1px solid var(--border)}
-.project-item:hover{opacity:.55}
-.project-num{
-  font-family:'Syne',sans-serif;font-size:.72rem;
-  color:var(--muted);letter-spacing:.1em;
-}
-.project-name{font-size:1.25rem;font-weight:600;letter-spacing:-.01em}
-.project-cat{font-size:.78rem;color:var(--muted);letter-spacing:.05em}
+        .orb-a { background: #8ddcbf; top: -60px; right: -80px; }
+        .orb-b { background: #ffd673; bottom: -110px; left: -70px; animation-delay: 2s; }
 
-/* ── Footer ── */
-footer{
-  padding:3.5rem max(2rem,6vw);
-  display:flex;justify-content:space-between;align-items:center;
-  flex-wrap:wrap;gap:1rem;
-}
-.github-link{
-  font-family:'Syne',sans-serif;
-  font-size:clamp(1.4rem,3vw,2rem);
-  font-weight:700;text-decoration:none;
-  color:var(--text);letter-spacing:.04em;
-  transition:color .2s;
-}
-.github-link:hover{color:var(--accent)}
-.copyright{font-size:.78rem;color:var(--muted)}
+        @keyframes drift {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-18px) translateX(14px); }
+        }
 
-/* ── Fade-in ── */
-.fade{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
-.fade.in{opacity:1;transform:none}
+        /* ── Header & Navigation ─────────────────── */
+        .topbar {
+            width: min(1120px, calc(100% - 2rem));
+            margin: 1.2rem auto 0;
+            padding: 0.85rem 1.5rem;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 1.2rem;
+            z-index: 100;
+        }
 
-/* ── Responsive ── */
-@media(max-width:640px){
-  .project-item{grid-template-columns:2.5rem 1fr}
-  .project-cat{display:none}
-  footer{flex-direction:column;align-items:flex-start}
-}
-</style>
+        .logo {
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: -0.02em;
+            text-decoration: none;
+            color: var(--ink);
+        }
+
+        nav { display: flex; gap: 1.5rem; }
+
+        nav a {
+            text-decoration: none;
+            color: var(--ink);
+            font-weight: 600;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        nav a:hover { opacity: 1; color: var(--accent); }
+
+        /* ── Hero ────────────────────────────────── */
+        main {
+            width: min(1120px, calc(100% - 2rem));
+            margin: 0 auto;
+        }
+
+        .hero {
+            padding: 8rem 0 4rem;
+        }
+
+        .kicker {
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        h1.hero-name {
+            font-size: clamp(3rem, 10vw, 6.5rem);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.04em;
+            margin-bottom: 1.5rem;
+        }
+
+        .summary {
+            max-width: 600px;
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: var(--sub);
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        .hero-actions {
+            margin-top: 3rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            border-radius: 999px;
+            padding: 0.9rem 1.8rem;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn.primary {
+            background: var(--ink);
+            color: #fff;
+            box-shadow: 0 10px 20px rgba(13, 43, 42, 0.15);
+        }
+
+        .btn.ghost {
+            background: rgba(255, 255, 255, 0.5);
+            color: var(--ink);
+            border: 1px solid var(--line);
+        }
+
+        .btn:hover { transform: translateY(-3px); }
+
+        /* ── Sections ────────────────────────────── */
+        .section {
+            padding: 6rem 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .section-label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--sub);
+            margin-bottom: 3.5rem;
+        }
+
+        /* ── Tech Grid ───────────────────────────── */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+
+        .tech-category h3 {
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 0.5rem;
+        }
+
+        .tech-category ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .tech-category li {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--ink);
+        }
+
+        /* ── Project List ────────────────────────── */
+        .project-item {
+            display: grid;
+            grid-template-columns: 4rem 1fr auto;
+            align-items: center;
+            gap: 2rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--line);
+            text-decoration: none;
+            transition: opacity 0.2s;
+            cursor: pointer;
+        }
+
+        .project-item:hover { opacity: 0.5; }
+
+        .project-num {
+            font-weight: 800;
+            font-size: 0.8rem;
+            color: var(--sub);
+        }
+
+        .project-name {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--ink);
+            letter-spacing: -0.02em;
+        }
+
+        .project-category {
+            font-size: 0.9rem;
+            color: var(--sub);
+            font-weight: 600;
+        }
+
+        /* ── Footer ──────────────────────────────── */
+        footer {
+            padding: 5rem 0 3rem;
+            border-top: 1px solid var(--line);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: min(1120px, calc(100% - 2rem));
+            margin: 0 auto;
+        }
+
+        .github-link {
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--ink);
+            transition: color 0.2s;
+        }
+
+        .github-link:hover { color: var(--accent); }
+
+        .copyright {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--sub);
+        }
+
+        /* ── Responsive ──────────────────────────── */
+        @media (max-width: 640px) {
+            .project-item { grid-template-columns: 2.5rem 1fr; }
+            .project-category { display: none; }
+            footer { flex-direction: column; gap: 2rem; align-items: flex-start; }
+            .hero-actions { flex-direction: column; }
+            .btn { text-align: center; }
+        }
+    </style>
 </head>
 <body>
 
-<header class="fade">
-  <a class="logo" href="#">PARIN</a>
-  <nav>
-    <a href="#tech">Tech Stack</a>
-    <a href="#projects">Projects</a>
-    <a href="https://github.com/jwyoon1220" target="_blank" rel="noopener">GitHub</a>
-  </nav>
+<div class="noise"></div>
+<div class="bg-orb orb-a"></div>
+<div class="bg-orb orb-b"></div>
+
+<header class="topbar">
+    <a href="/" class="logo">파린 Parin</a>
+    <nav>
+        <a href="#tech">Tech Stack</a>
+        <a href="#projects">Projects</a>
+        <a id="nav-github" href="https://github.com/jwyoon1220" target="_blank" rel="noopener">GitHub</a>
+    </nav>
 </header>
 
 <main>
-  <section class="hero fade">
-    <p class="hero-role">Full-Stack Developer</p>
-    <h1 class="hero-name">파린<br>Parin</h1>
-    <p class="hero-sub">
-      OS&thinsp;Kernel&ensp;&middot;&ensp;Game&thinsp;Engine&ensp;&middot;&ensp;Backend&ensp;&middot;&ensp;Frontend
-    </p>
-  </section>
+    <section class="hero">
+        <div class="hero-inner">
+            <p class="kicker">Full-Stack Developer</p>
+            <h1 class="hero-name">파린 Parin</h1>
+            <p class="summary">OS Kernel · Game Engine · Backend · Frontend</p>
+            <div class="hero-actions">
+                <a href="#projects" class="btn primary">View Projects</a>
+                <a href="https://github.com/jwyoon1220" class="btn ghost">GitHub ↗</a>
+            </div>
+        </div>
+    </section>
 
-  <section id="tech" class="section fade">
-    <span class="section-label">Tech Stack</span>
-    <div class="tech-grid">
-      <div class="tech-category">
-        <h3>Language</h3>
-        <ul>
-          <li>Java</li>
-          <li>Kotlin</li>
-          <li>C / C++</li>
-          <li>C#</li>
-          <li>NASM Assembly</li>
-          <li>Python</li>
-        </ul>
-      </div>
-      <div class="tech-category">
-        <h3>Framework</h3>
-        <ul>
-          <li>Spring Boot</li>
-          <li>LWJGL</li>
-          <li>Minecraft Plugin</li>
-          <li>JNI</li>
-        </ul>
-      </div>
-      <div class="tech-category">
-        <h3>Domain</h3>
-        <ul>
-          <li>OS / Kernel</li>
-          <li>Game Engine</li>
-          <li>Graphics</li>
-          <li>Frontend</li>
-          <li>Backend</li>
-          <li>Low-Level Programming</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+    <section id="tech" class="section">
+        <span class="section-label">Tech Stack</span>
+        <div id="tech-categories" class="tech-grid">
+            
+            <div class="tech-category">
+                <h3>Language</h3>
+                <ul>
+                    <li>Java</li>
+                    <li>Kotlin</li>
+                    <li>C / C++</li>
+                    <li>C#</li>
+                    <li>NASM Assembly</li>
+                    <li>Python</li>
+                </ul>
+            </div>
+            
+            <div class="tech-category">
+                <h3>Framework</h3>
+                <ul>
+                    <li>Spring Boot</li>
+                    <li>LWJGL</li>
+                    <li>Minecraft Plugin</li>
+                    <li>JNI</li>
+                </ul>
+            </div>
+            
+            <div class="tech-category">
+                <h3>Domain</h3>
+                <ul>
+                    <li>OS / Kernel</li>
+                    <li>Game Engine</li>
+                    <li>Graphics</li>
+                    <li>Frontend</li>
+                    <li>Backend</li>
+                    <li>Low-Level Programming</li>
+                </ul>
+            </div>
+            
+        </div>
+    </section>
 
-  <section id="projects" class="section fade">
-    <span class="section-label">Projects</span>
-    <div class="project-list">
-      <div class="project-item">
-        <span class="project-num">01</span>
-        <span class="project-name">휘토피아</span>
-        <span class="project-cat">Minecraft Streamer Server</span>
-      </div>
-      <div class="project-item">
-        <span class="project-num">02</span>
-        <span class="project-name">휘리릭</span>
-        <span class="project-cat">Minecraft Streamer Server</span>
-      </div>
-      <div class="project-item">
-        <span class="project-num">03</span>
-        <span class="project-name">골동품</span>
-        <span class="project-cat">Minecraft Streamer Server</span>
-      </div>
-      <div class="project-item">
-        <span class="project-num">04</span>
-        <span class="project-name">디두월드2</span>
-        <span class="project-cat">Minecraft Streamer Server</span>
-      </div>
-    </div>
-  </section>
+    <section id="projects" class="section">
+        <span class="section-label">Projects</span>
+        <div id="project-list" class="project-list">
+            
+            <div class="project-item">
+                <span class="project-num">01</span>
+                <span class="project-name">휘토피아</span>
+                <span class="project-category">Minecraft Streamer Server</span>
+            </div>
+            
+            <div class="project-item">
+                <span class="project-num">02</span>
+                <span class="project-name">휘리릭</span>
+                <span class="project-category">Minecraft Streamer Server</span>
+            </div>
+            
+            <div class="project-item">
+                <span class="project-num">03</span>
+                <span class="project-name">골동품</span>
+                <span class="project-category">Minecraft Streamer Server</span>
+            </div>
+            
+            <div class="project-item">
+                <span class="project-num">04</span>
+                <span class="project-name">디두월드2</span>
+                <span class="project-category">Minecraft Streamer Server</span>
+            </div>
+            
+        </div>
+    </section>
 </main>
 
-<footer class="fade">
-  <a class="github-link" href="https://github.com/jwyoon1220" target="_blank" rel="noopener">
-    ↗&thinsp;GitHub / jwyoon1220
-  </a>
-  <span class="copyright">© 2026 Parin&ensp;&middot;&ensp;Full-Stack Developer</span>
+<footer>
+    <a id="github-link" href="https://github.com/jwyoon1220" target="_blank" rel="noopener" class="github-link">
+        ↗ GitHub
+    </a>
+    <p class="copyright">© 2026 파린 Parin · Full-Stack Developer</p>
 </footer>
 
-<script>
-const io = new IntersectionObserver(
-  entries => entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-  }),
-  { threshold: 0.06 }
-);
-document.querySelectorAll('.fade').forEach((el, i) => {
-  el.style.transitionDelay = i * 80 + 'ms';
-  io.observe(el);
-});
-</script>
 </body>
 </html>
